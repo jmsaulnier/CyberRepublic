@@ -181,11 +181,12 @@ class C extends BaseComponent {
                     return x;
                 }}>
                 {_.entries(_.omitBy(config.data.mappingRoleToName,
-                    (val) => val === config.data.mappingRoleToName.COUNCIL)).map(([key, val]) => {
-                    return <Select.Option key={key} value={key}>
-                        {I18N.get(val)}
-                    </Select.Option>
-                })}
+                    (val) => val === config.data.mappingRoleToName.COUNCIL || val === config.data.mappingRoleToName.SECRETARY))
+                    .map(([key, val]) => {
+                        return <Select.Option key={key} value={key}>
+                            {I18N.get(val)}
+                        </Select.Option>
+                    })}
             </Select>
         )
 

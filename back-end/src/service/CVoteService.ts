@@ -345,7 +345,7 @@ export default class extends Base {
     }
 
     private isCouncil() {
-        return checkPermissions(this.currentUser, constant.USER_ROLE.COUNCIL);
+        return checkPermissions(this.currentUser.role, constant.USER_ROLE.COUNCIL);
     }
 
 }

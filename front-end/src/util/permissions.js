@@ -18,29 +18,29 @@ export function checkPermissions(userRole, neededRole) {
     return false;
 }
 
-export function isCouncil(user) {
-    if (getPermissionIndex(user.role) === getPermissionIndex(USER_ROLE.COUNCIL)) {
+export function isCouncil(role) {
+    if (getPermissionIndex(role) === getPermissionIndex(USER_ROLE.COUNCIL)) {
         return true;
     }
     return false;
 }
 
-export function isSecretary(user) {
-    if (getPermissionIndex(user.role) === getPermissionIndex(USER_ROLE.COUNCIL)) {
+export function isSecretary(role) {
+    if (getPermissionIndex(role) === getPermissionIndex(USER_ROLE.COUNCIL)) {
         return true;
     }
     return false;
 }
 
-export function isAdmin(user) {
-    if (getPermissionIndex(user.role) === getPermissionIndex(USER_ROLE.ADMIN)) {
+export function isAdmin(role) {
+    if (getPermissionIndex(role) === getPermissionIndex(USER_ROLE.ADMIN)) {
         return true;
     }
     return false;
 }
 
-export function isLeader(user) {
-    if (getPermissionIndex(user.role) === getPermissionIndex(USER_ROLE.LEADER)) {
+export function isLeader(role) {
+    if (getPermissionIndex(role) === getPermissionIndex(USER_ROLE.LEADER)) {
         return true;
     }
     return false;
