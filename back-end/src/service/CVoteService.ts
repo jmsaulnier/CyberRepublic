@@ -2,7 +2,7 @@ import Base from './Base';
 import {Document} from 'mongoose';
 import * as _ from 'lodash';
 import {constant} from '../constant';
-import {validate, utilCrypto, mail} from '../utility';
+import {validate, utilCrypto, mail, checkPermissions} from '../utility';
 import * as moment from 'moment';
 
 // TODO: this needs to be improved
@@ -345,14 +345,7 @@ export default class extends Base {
     }
 
     private isCouncil() {
-        return [
-
-            '5b28be2784f6f900350d30b9',
-            '5b367c128f23a70035d35425',
-            '5bcf21f030826d68a940b017',
-            '5b4c3ba6450ff10035954c80'
-
-        ].indexOf(this.currentUser._id.toString()) >= 0
+        return checkPermissions(this.currentUser, constant.USER_ROLE.COUNCIL);
     }
 
 }

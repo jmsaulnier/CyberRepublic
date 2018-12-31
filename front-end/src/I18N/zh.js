@@ -761,6 +761,7 @@ const zh = {
     // Role
     'role.member': '成员',
     'role.organizer': '组织者',
+    'role.council': 'Council',
     'role.admin': '管理员',
     'role.admin.mode': '管理员模式',
 

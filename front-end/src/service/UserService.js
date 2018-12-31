@@ -1,7 +1,7 @@
 import BaseService from '../model/BaseService'
 import _ from 'lodash'
 import {USER_ROLE} from '@/constant'
-import {api_request} from '@/util';
+import {api_request, checkPermissions} from '@/util';
 
 export default class extends BaseService {
 
@@ -22,14 +22,14 @@ export default class extends BaseService {
 
         this.dispatch(userRedux.actions.is_login_update(true))
 
-        if ([USER_ROLE.ADMIN, USER_ROLE.COUNCIL].includes(res.user.role)) {
+        if (checkPermissions(res.user.role, USER_ROLE.ADMIN)) {
             this.dispatch(userRedux.actions.is_admin_update(true))
-        }else{
+        } else {
             this.dispatch(userRedux.actions.is_admin_update(false))
         }
-        if ([USER_ROLE.LEADER].includes(res.user.role)) {
+        if (checkPermissions(res.user.role, USER_ROLE.LEADER)) {
             this.dispatch(userRedux.actions.is_leader_update(true))
-        }else {
+        } else {
             this.dispatch(userRedux.actions.is_leader_update(false))
         }
 
@@ -116,12 +116,12 @@ export default class extends BaseService {
         })
 
         this.dispatch(userRedux.actions.is_login_update(true));
-        if ([USER_ROLE.LEADER].includes(data.role)) {
+        if (checkPermissions(data.role, USER_ROLE.LEADER)) {
             this.dispatch(userRedux.actions.is_leader_update(true))
         } else {
             this.dispatch(userRedux.actions.is_leader_update(false))
         }
-        if ([USER_ROLE.ADMIN, USER_ROLE.COUNCIL].includes(data.role)) {
+        if (checkPermissions(data.role, USER_ROLE.ADMIN)) {
             this.dispatch(userRedux.actions.is_admin_update(true))
         } else {
             this.dispatch(userRedux.actions.is_admin_update(false))

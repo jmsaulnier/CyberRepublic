@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { withRouter } from 'react-router';
 import {api_request, upload_file} from './request';
+import { checkPermissions } from './permissions';
 
 /**
  * Helper for React-Redux connect
@@ -13,7 +14,7 @@ import {api_request, upload_file} from './request';
 export const createContainer = (component, mapState, mapDispatch=_.noop())=>{
     const tmp_mapState = (state, ownProps)=>{
         const s = {
-            lang : state.language.language
+            lang: state.language.language
         };
 
         return _.merge(s, mapState(state, ownProps));
@@ -30,8 +31,8 @@ export const constant = (moduleName, detailArray)=>{
     return result;
 };
 
-
 export {
     api_request,
-    upload_file
-};
+    upload_file,
+    checkPermissions
+}

@@ -23,6 +23,7 @@ import TimezonePicker from 'react-timezone'
 import I18N from '@/I18N'
 import {upload_file} from '@/util'
 import './style.scss'
+import * as _ from 'lodash'
 import {TASK_CATEGORY, TASK_TYPE, TASK_STATUS, USER_GENDER, USER_SKILLSET, USER_PROFESSION} from '@/constant'
 
 const FormItem = Form.Item
@@ -179,7 +180,8 @@ class C extends BaseComponent {
 
                     return x;
                 }}>
-                {_.entries(config.data.mappingRoleToName).map(([key, val]) => {
+                {_.entries(_.omitBy(config.data.mappingRoleToName,
+                    (val) => val === config.data.mappingRoleToName.COUNCIL)).map(([key, val]) => {
                     return <Select.Option key={key} value={key}>
                         {I18N.get(val)}
                     </Select.Option>

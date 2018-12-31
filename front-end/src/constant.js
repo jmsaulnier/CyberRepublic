@@ -5,9 +5,10 @@ const create = (list) => {
 }
 
 export const USER_ROLE = {
-    MEMBER : 'MEMBER',
-    LEADER : 'LEADER',
-    ADMIN : 'ADMIN',
+    MEMBER: 'MEMBER',
+    LEADER: 'LEADER',
+    ADMIN: 'ADMIN',
+    SECRETARY: 'SECRETARY',
     COUNCIL: 'COUNCIL'
 }
 

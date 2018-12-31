@@ -761,6 +761,7 @@ const en = {
     // Role
     'role.member': 'Member',
     'role.organizer': 'Organizer',
+    'role.council': 'Council',
     'role.admin': 'Admin',
     'role.admin.mode': 'Admin Mode',
 
