@@ -32,10 +32,15 @@ export default class extends BaseComponent {
             'about',
             'faq',
             'contact',
+            'suggestion',
+            'proposals',
+            'council-secretariat',
+            'constitution/1',
             'council'
         ], key)) {
             this.props.history.push('/' + ev.key)
         }
+
         else if (key === 'logout') {
             Modal.confirm({
                 title: I18N.get('logout.title'),
@@ -76,6 +81,8 @@ export default class extends BaseComponent {
                 let forumLink = `${process.env.FORUM_URL}/login`;
                 window.open(forumLink, '_blank');
             }
+        } else if (key === 'landing') {
+            this.props.history.push('/')
         }
     }
 
@@ -108,25 +115,36 @@ export default class extends BaseComponent {
                             {I18N.get('0102')}
                         </Menu.Item>
                         */}
+                        <Menu.Item key="landing">
+                            {I18N.get('0012')}
+                        </Menu.Item>
                         <Menu.Item key="developer/learn">
                             {I18N.get('developer.learn')}
                         </Menu.Item>
                         <Menu.Item key="teams">
                             {I18N.get('0005')}
                         </Menu.Item>
-                        <Menu.Item key="council">
+                        {/* <Menu.Item key="council-secretariat">
+                            {I18N.get('navagation.council')}
+                        </Menu.Item> */}
+                        {/* <Menu.Item key="council">
                             {I18N.get('council.0001')}
+                        </Menu.Item> */}
+                        <Menu.Item key="suggestion">
+                            {I18N.get('navagation.suggestion')}
                         </Menu.Item>
+                        <Menu.Item key="proposals">
+                            {I18N.get('council.voting.proposalList')}
+                        </Menu.Item>
+                        {/* <Menu.Item key="constitution/1">
+                            {I18N.get('navagation.constitution')}
+                        </Menu.Item> */}
                         <Menu.Item key="blog">
                             {I18N.get('0110')}
                         </Menu.Item>
-                        {/*
-                        <Menu.Item key="ambassadors">
-                            {I18N.get('0107')}
+                        <Menu.Item key="forum">
+                            {I18N.get('0011')}
                         </Menu.Item>
-                        <Menu.Item key="developer">
-                            {I18N.get('0100')}
-                        </Menu.Item>*/}
                     </Menu>
                 </Col>
             </Row>

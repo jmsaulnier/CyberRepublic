@@ -26,9 +26,9 @@ const prodEnv = {
 const stagingEnv = {
     NODE_ENV: JSON.stringify('staging'),
     PLATFORM_ENV: JSON.stringify('web'),
-    SERVER_URL: JSON.stringify('http://staging.cyberrepublic.org:3000'),
-    FORUM_URL: JSON.stringify('http://staging.cyberrepublic.org:3100'),
-    SSO_URL: JSON.stringify('http://staging.cyberrepublic.org:3100/session/sso_login'),
+    SERVER_URL: JSON.stringify('http://18.136.60.61:3000'),
+    FORUM_URL: JSON.stringify('http://18.136.60.61:3100'),
+    SSO_URL: JSON.stringify('http://18.136.60.61:3100/session/sso_login'),
     CR_VERSION: JSON.stringify(process.env.CR_VERSION)
 };
 
@@ -85,7 +85,26 @@ module.exports = merge(common, {
             {
                 oneOf: [
                     {
-                        test: /\.(png|svg|jpg|gif)$/,
+                        test: /\.svg$/,
+                        exclude: /node_modules/,
+                        include: resolve('src'),
+                        use: [
+                            {
+                                loader: '@svgr/webpack',
+                            },
+                            {
+                                loader: 'file-loader',
+                                options: {
+                                    limit: 10000,
+                                    name: '[name].[hash:8].[ext]',
+                                    publicPath: '/static/media',
+                                    outputPath: 'static/media',
+                                },
+                            },
+                        ],
+                    },
+                    {
+                        test: /\.(png|jpg|gif)$/,
                         include: resolve('src'),
                         loader: 'file-loader',
                         options: {

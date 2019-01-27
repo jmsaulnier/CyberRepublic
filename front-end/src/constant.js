@@ -5,12 +5,32 @@ const create = (list) => {
 }
 
 export const USER_ROLE = {
-    MEMBER: 'MEMBER',
-    LEADER: 'LEADER',
-    ADMIN: 'ADMIN',
+    MEMBER : 'MEMBER',
+    LEADER : 'LEADER',
+    ADMIN : 'ADMIN',
+    COUNCIL: 'COUNCIL',
     SECRETARY: 'SECRETARY',
-    COUNCIL: 'COUNCIL'
 }
+
+// council related
+// '5c2f5a15f13d65008969be61', // Feng Zhang
+// '5b28be2784f6f900350d30b9', // Kevin Zhang
+// '5bcf21f030826d68a940b017', //  Yipeng Su
+// '5b4c3ba6450ff10035954c80', // Feng zhu
+// '5b367c128f23a70035d35425', // Fay Li
+export const COUNCIL_MEMBERS = {
+    '5bcf21f030826d68a940b017': 'Yipeng Su',
+    // '5c2f5a15f13d65008969be61': 'Feng Zhang',
+    '5b367c128f23a70035d35425': 'Fay Li',
+    '5b28be2784f6f900350d30b9': 'Kevin Zhang',
+}
+
+export const COUNCIL_MEMBER_IDS = _.keys(COUNCIL_MEMBERS)
+
+export const ADMIN_MEMBER_IDS = [
+    ...COUNCIL_MEMBER_IDS,
+    '5b4c3ba6450ff10035954c80'
+]
 
 export const USER_EMPOWER_TYPE = {
     MARKETING: 'MARKETING',
@@ -178,7 +198,29 @@ export const USER_AVATAR_DEFAULT = '/assets/images/user_blurred_white.png'
 export const TASK_AVATAR_DEFAULT = '/assets/images/Elastos_Logo.png'
 export const TEAM_AVATAR_DEFAULT = '/assets/images/team_blurred.svg'
 
+// council vote
 export const CVOTE_STATUS = create(['DRAFT', 'PROPOSED', 'ACTIVE', 'REJECT', 'FINAL', 'DEFERRED'])
+
+export const CVOTE_RESULT = {
+  SUPPORT: 'support',
+  REJECT: 'reject',
+  ABSTENTION: 'abstention',
+  UNDECIDED: 'undecided',
+};
+
+export const CVOTE_RESULT_TEXT = {
+  undefined: 'Undecided',
+  support: 'Yes',
+  reject: 'No',
+  abstention: 'Abstained',
+  '-1': 'Undecided',
+}
+
+export const CVOTE_TYPE = {
+  1: 'New Motion',
+  2: 'Motion Against',
+  3: 'Anything Else',
+}
 
 export const USER_SKILLSET = {
     BUSINESS: create(['VIRTUAL_ASSISTANT', 'DATA_ENTRY', 'MARKET_RESEARCH', 'BUSINESS_PLANS',
@@ -204,3 +246,8 @@ export const SORT_ORDER = create(['ASC', 'DESC'])
 export const USER_PROFESSION = create(['ENGINEERING', 'COMPUTER_SCIENCE', 'PRODUCT_MANAGEMENT',
     'ART_DESIGN', 'SALES', 'MARKETING', 'BUSINESS_FINANCE', 'ENTREPRENEUR', 'STUDENT',
     'HEALTH_MEDICINE', 'LITERATURE_WRITING', 'TRANSLATION', 'LAW', 'ECONOMICS', 'MANAGEMENT', 'OTHER'])
+
+// suggestion
+export const SUGGESTION_STATUS = create(['ACTIVE', 'ABUSED', 'ARCHIVED'])
+
+export const SUGGESTION_ABUSED_STATUS = create(['REPORTED', 'HANDLED'])

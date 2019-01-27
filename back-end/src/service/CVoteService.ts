@@ -5,9 +5,6 @@ import {constant} from '../constant';
 import {validate, utilCrypto, mail, checkPermissions} from '../utility';
 import * as moment from 'moment';
 
-// TODO: this needs to be improved
-const map_key = ['Kevin Zhang', 'Fay Li', 'Yipeng Su'];
-
 let tm = null;
 
 const restrictedFields = {
@@ -26,8 +23,8 @@ export default class extends Base {
             throw 'cvoteservice.create - must be logged in';
         }
 
-        if (!this.isCouncil()) {
-            throw 'cvoteservice.create - not council'
+        if (!this.canManageProposal()) {
+            throw 'cvoteservice.create - not council or secretary'
         }
 
         const db_cvote = this.getDBModel('CVote');
@@ -87,7 +84,7 @@ export default class extends Base {
         // if we are not querying only published records, we need to be an admin
         // TODO: write a test for this
         if (param.published !== true) {
-            if (!this.isLoggedIn() || !this.isAdmin()) {
+            if (!this.isLoggedIn() || !this.canManageProposal()) {
                 throw 'cvoteservice.list - unpublished proposals only visible to admin';
             }
         } else {
@@ -126,7 +123,7 @@ export default class extends Base {
             throw 'cvoteservice.update - invalid current user';
         }
 
-        if (!this.isCouncil()) {
+        if (!this.canManageProposal()) {
             throw 'cvoteservice.update - not council'
         }
 
@@ -138,18 +135,12 @@ export default class extends Base {
         let doc:any = {}
 
         if (this.isExpired(cur) || _.includes([constant.CVOTE_STATUS.FINAL, constant.CVOTE_STATUS.DEFERRED], cur.status)) {
-
-            if (cur.published === param.published) {
-                throw 'cvoteservice.update - proposal finished or deferred, can not edit anymore';
-
-            } else {
-
+            if (cur.published !== param.published) {
                 // if published is changed, we let it pass if published is changed, but only that field
                 doc = {
                     published: param.published
                 }
             }
-
         } else {
             doc = _.omit(param, restrictedFields.update)
 
@@ -167,6 +158,9 @@ export default class extends Base {
             }
         }
 
+        // always allow secretary to edit notes
+        if (param.notes) doc.notes = param.notes
+
         const cvote = await db_cvote.update({_id : param._id}, doc);
 
         this.sendEmailNotification({_id : param._id}, 'update');
@@ -181,7 +175,7 @@ export default class extends Base {
         if(!cur){
             throw 'invalid proposal id';
         }
-        if (!this.isCouncil()) {
+        if (!this.canManageProposal()) {
             throw 'cvoteservice.finishById - not council'
         }
         if(_.includes([constant.CVOTE_STATUS.FINAL], cur.status)){
@@ -200,6 +194,15 @@ export default class extends Base {
     public async getById(id): Promise<any>{
         const db_cvote = this.getDBModel('CVote');
         const rs = await db_cvote.findOne({_id : id});
+        const db_user = this.getDBModel('User');
+        const councilMembers = await db_user.find({_id : { $in: constant.COUNCIL_MEMBER_IDS }});
+        const avatar_map = {}
+
+        _.each(councilMembers, user => {
+            const name: string = constant.COUNCIL_MEMBERS[user._id.toString()]
+            avatar_map[name] = user.profile.avatar
+        })
+        rs.avatar_map = avatar_map
         return rs;
     }
 
@@ -267,7 +270,7 @@ export default class extends Base {
         if(!cur){
             throw 'invalid proposal id';
         }
-        if (!this.isCouncil()) {
+        if (!this.canManageProposal()) {
             throw 'cvoteservice.updateNote - not council'
         }
         if(this.currentUser.role !== constant.USER_ROLE.SECRETARY){
@@ -344,8 +347,9 @@ export default class extends Base {
         }, 1000*60);
     }
 
-    private isCouncil() {
-        return checkPermissions(this.currentUser.role, constant.USER_ROLE.COUNCIL);
+    private canManageProposal() {
+        return checkPermissions(this.currentUser.role, constant.USER_ROLE.SECRETARY) ||
+            (constant.COUNCIL_MEMBER_IDS.indexOf(this.currentUser._id.toString()) >= 0);
     }
 
 }

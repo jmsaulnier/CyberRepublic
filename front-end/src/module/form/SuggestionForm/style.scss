@@ -1,0 +1,40 @@
+@import "@/style/variable";
+@import "@/style/color";
+
+.c_SuggestionForm {
+  .title {
+    font-size: 42px;
+    padding-bottom: 0;
+
+    @media only screen and (max-width: $mobile-width) {
+      margin-left: 16px;
+    }
+  }
+  @media only screen and (min-width: 576px) {
+    .ant-col-sm-12 {
+      width: 100%;
+    }
+  }
+  .ql-toolbar.ql-snow {
+    text-align: left;
+  }
+  .form-title #title {
+    border-radius: 0;
+  }
+  .form-desc {
+    background: white;
+    height: 300px;
+
+    .ql-container {
+      height: 245px;
+    }
+  }
+  .form-actions {}
+  .ant-btn.cr-btn-primary {
+    margin-left: 10px;
+  }
+
+  ol {
+    margin-left: $gap_1;
+  }
+}

@@ -1,4 +1,4 @@
-import { USER_ROLE } from '../constant/constant'
+import { USER_ROLE, COUNCIL_MEMBER_IDS } from '../constant/constant'
 
 
 export function getPermissionIndex(permissions) {
@@ -15,12 +15,16 @@ export function getPermissionIndex(permissions) {
 export function checkPermissions(user, role) {
   if (getPermissionIndex(user.role) >= getPermissionIndex(role)) {
     return true;
+  } else if (COUNCIL_MEMBER_IDS.indexOf(user._id) >= 0) {
+    return true;
   }
   return false;
 }
 
-export function isCouncil(role) {
-  if (getPermissionIndex(role) === getPermissionIndex(USER_ROLE.COUNCIL)) {
+export function isCouncil(user) {
+  if (getPermissionIndex(user.role) === getPermissionIndex(USER_ROLE.COUNCIL)) {
+    return true;
+  } else if (COUNCIL_MEMBER_IDS.indexOf(user._id) >= 0) {
     return true;
   }
   return false;

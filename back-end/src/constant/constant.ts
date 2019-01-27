@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-const create = (constant_list: [string]): any => {
+const create = (constant_list: string[]): any => {
     const map = {};
     _.each(constant_list, (key)=>{
         map[key] = key;
@@ -128,6 +128,12 @@ export const TASK_CANDIDATE_CATEGORY = {
 }
 
 export const CVOTE_STATUS = create(['DRAFT', 'PROPOSED', 'ACTIVE', 'REJECT', 'FINAL', 'DEFERRED']);
+export const CVOTE_RESULT = {
+    SUPPORT: 'support',
+    REJECT: 'reject',
+    ABSTENTION: 'abstention',
+    UNDECIDED: 'undecided',
+};
 export const CVOTE_EXPIRATION = 1000*60*60*24*7;
 
 export const USER_SKILLSET = {
@@ -149,8 +155,37 @@ export const USER_SKILLSET = {
         'LEGAL_CONSULTING', 'FINANCIAL_CONSULTING', 'PRESENTATION'])
 }
 
-export const SORT_ORDER = create(['ASC', 'DESC'])
+// mongo do not support ASC and DESC options
+export const SORT_ORDER = {
+    ASC: 1,
+    DESC: -1
+}
 
 export const USER_PROFESSION = create(['ENGINEERING', 'COMPUTER_SCIENCE', 'PRODUCT_MANAGEMENT',
     'ART_DESIGN', 'SALES', 'MARKETING', 'BUSINESS_FINANCE', 'ENTREPRENEUR', 'STUDENT',
     'HEALTH_MEDICINE', 'LITERATURE_WRITING', 'TRANSLATION', 'LAW', 'ECONOMICS', 'MANAGEMENT'])
+
+export const SUGGESTION_STATUS = create(['ACTIVE', 'ABUSED', 'ARCHIVED'])
+
+export const SUGGESTION_ABUSED_STATUS = create(['REPORTED', 'HANDLED'])
+
+// DB sensitive data we do not want to explosure
+export const DB_EXCLUDED_FIELDS = {
+    USER: {
+        SENSITIVE: '-password -salt -email -resetToken',
+    },
+}
+
+export const DB_SELECTED_FIELDS = {
+    USER: {
+        NAME: 'profile.firstName profile.lastName username'
+    },
+}
+
+export const COUNCIL_MEMBERS = {
+    '5bcf21f030826d68a940b017': 'Yipeng Su',
+    // '5c2f5a15f13d65008969be61': 'Feng Zhang',
+    '5b367c128f23a70035d35425': 'Fay Li',
+    '5b28be2784f6f900350d30b9': 'Kevin Zhang',
+}
+export const COUNCIL_MEMBER_IDS = _.keys(COUNCIL_MEMBERS)

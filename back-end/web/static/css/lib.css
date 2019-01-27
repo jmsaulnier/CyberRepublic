@@ -78,12 +78,6 @@
 .ant-table-thead > tr > th.ant-table-column-has-filters {
   overflow: hidden;
 }
-.ant-table-thead > tr:first-child > th:first-child {
-  border-top-left-radius: 4px;
-}
-.ant-table-thead > tr:first-child > th:last-child {
-  border-top-right-radius: 4px;
-}
 .ant-table-thead > tr:not(:last-child) > th[colspan] {
   border-bottom: 0;
 }
@@ -152,9 +146,6 @@
 }
 .ant-table-tbody > tr.ant-table-row-selected td {
   background: #fafafa;
-}
-.ant-table-thead > tr > th.ant-table-column-sort {
-  background: #f5f5f5;
 }
 .ant-table-thead > tr > th,
 .ant-table-tbody > tr > td {
@@ -5501,20 +5492,6 @@ textarea.ant-input {
 .ant-btn > .anticon + span,
 .ant-btn > span + .anticon {
   margin-left: 8px;
-}
-.ant-btn-clicked:after {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  bottom: -1px;
-  right: -1px;
-  border-radius: inherit;
-  border: 0 solid #1890ff;
-  opacity: 0.4;
-  -webkit-animation: buttonEffect .4s;
-          animation: buttonEffect .4s;
-  display: block;
 }
 .ant-btn-danger.ant-btn-clicked:after {
   border-color: #f5222d;

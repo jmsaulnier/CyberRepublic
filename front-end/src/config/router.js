@@ -47,9 +47,13 @@ import ProfileSubmissionsPage from '@/module/page/profile/submissions/Container'
 import ProfileSubmissionCreatePage from '@/module/page/profile/submission_create/Container'
 import ProfileCommunitiesPage from '@/module/page/profile/communities/Container'
 import ProfileSubmissionDetailPage from '@/module/page/profile/submission_detail/Container'
+import ProfileSuggestionListPage from '@/module/page/profile/suggestion/list/Container'
 
 import MemberPage from '@/module/page/member/Container'
 
+// admin pages
+import TeamListPage from '../module/page/admin/teams/TeamListPage';
+import AdminSuggestionPage from '../module/page/admin/suggestion/list/Container';
 import AdminUsersPage from '@/module/page/admin/users/Container'
 import AdminProfileDetailPage from '@/module/page/admin/profile_detail/Container'
 import AdminFormsPage from '@/module/page/admin/forms/Container'
@@ -71,11 +75,8 @@ import FormAnniversaryVideo from '@/module/page/form_ext/anni2018_video/Containe
 // external forms
 import FormTraining1Page from '@/module/page/form_ext/training_1/Container'
 
-
-// admin team page
-import TeamListPage from '../module/page/admin/teams/TeamListPage';
-
 // council
+import CouncilSecretariatPage from '../module/page/council_secretariat/Container';
 import CouncilPage from '../module/page/council/Container';
 import CouncilListPage from '../module/page/council/list/Container';
 import CouncilDetailPage from '../module/page/council/detail/Container';
@@ -83,354 +84,393 @@ import CouncilDetailPage from '../module/page/council/detail/Container';
 import CVoteCreatePage from '@/module/page/CVote/create/Container';
 import CVoteListPage from '@/module/page/CVote/list/Container';
 import CVoteEditPage from '@/module/page/CVote/edit/Container';
+import CVoteDetailPage from '@/module/page/CVote/detail/Container';
+
+// suggestion
+import SuggestionListPage from '@/module/page/suggestion/list/Container'
+import SuggestionDetailPage from '@/module/page/suggestion/detail/Container'
+import ConstitutionPage from '@/module/page/constitution/Container'
 
 import NotFound from '@/module/page/error/NotFound'
 
 export default [
-    {
-        path: '/',
-        page: LandingPage
-    },
-    {
-        path: '/home',
-        page: HomePage
-    },
-    {
-        path: '/sso/login',
-        page: SSOPage
-    },
-    {
-        path: '/cr100',
-        page: Cr100Page
-    },
-    {
-        path: '/crcles',
-        page: Emp35Page
-    },
-    {
-        path: '/ambassadors',
-        page: Ambassadors
-    },
-    {
-        path: '/developer',
-        page: DeveloperPage
-    },
-    {
-        path: '/developer/learn',
-        page: DeveloperLearnPage
-    },
-    {
-        path: '/developer/search',
-        page: DeveloperSearchPage
-    },
-    {
-        path: '/developer/country/:country',
-        page: DeveloperPage
-    },
-    {
-        path: '/developer/country/:country/region/:region',
-        page: DeveloperPage
-    },
-    {
-        path: '/leader',
-        page: LeaderPage
-    },
-    {
-        path: '/directory',
-        page: DirectoryPage
-    },
-    {
-        path: '/teams',
-        page: TeamsPage
-    },
-    {
-        path: '/tasks',
-        page: TasksPage
-    },
-    {
-        path: '/task-detail/:taskId',
-        page: TaskDetailPage
-    },
-    {
-        path: '/admin/task-detail/:taskId',
-        page: TaskDetailPage
-    },
-    {
-        path: '/task-app/:taskId/:applicantId',
-        page: TaskApplicationPage
-    },
-    {
-        path: '/task-create',
-        page: TaskCreatePage
-    },
-    /*
+  {
+    path: '/',
+    page: HomePage,
+  },
+  {
+    path: '/home',
+    page: HomePage,
+  },
+  {
+    path: '/constitution/:id',
+    page: ConstitutionPage,
+  },
+  {
+    path: '/sso/login',
+    page: SSOPage,
+  },
+  {
+    path: '/cr100',
+    page: Cr100Page,
+  },
+  {
+    path: '/crcles',
+    page: Emp35Page,
+  },
+  {
+    path: '/ambassadors',
+    page: Ambassadors,
+  },
+  {
+    path: '/developer',
+    page: DeveloperPage,
+  },
+  {
+    path: '/developer/learn',
+    page: DeveloperLearnPage,
+  },
+  {
+    path: '/developer/search',
+    page: DeveloperSearchPage,
+  },
+  {
+    path: '/developer/country/:country',
+    page: DeveloperPage,
+  },
+  {
+    path: '/developer/country/:country/region/:region',
+    page: DeveloperPage,
+  },
+  {
+    path: '/leader',
+    page: LeaderPage,
+  },
+  {
+    path: '/directory',
+    page: DirectoryPage,
+  },
+  {
+    path: '/teams',
+    page: TeamsPage,
+  },
+  {
+    path: '/tasks',
+    page: TasksPage,
+  },
+  {
+    path: '/task-detail/:taskId',
+    page: TaskDetailPage,
+  },
+  {
+    path: '/admin/task-detail/:taskId',
+    page: TaskDetailPage,
+  },
+  {
+    path: '/task-app/:taskId/:applicantId',
+    page: TaskApplicationPage,
+  },
+  {
+    path: '/task-create',
+    page: TaskCreatePage,
+  },
+  /*
     ********************************************************************************
     * Login/Register
     ********************************************************************************
       */
-    {
-        path: '/login',
-        page: LoginPage
-    },
-    {
-        path: '/register',
-        page: RegisterPage
-    },
-    {
-        path: '/forgot-password',
-        page: ForgotPasswordPage
-    },
-    {
-        path: '/reset-password',
-        page: ResetPasswordPage
-    },
-    /*
+  {
+    path: '/login',
+    page: LoginPage,
+  },
+  {
+    path: '/register',
+    page: RegisterPage,
+  },
+  {
+    path: '/forgot-password',
+    page: ForgotPasswordPage,
+  },
+  {
+    path: '/reset-password',
+    page: ResetPasswordPage,
+  },
+  /*
     ********************************************************************************
     * Minor Pages
     ********************************************************************************
       */
-    {
-        path: '/help',
-        page: HelpPage
-    },
-    {
-        path: '/faq',
-        page: FAQPage
-    },
-    {
-        path: '/about',
-        page: AboutPage
-    },
-    {
-        path: '/slack',
-        page: SlackPage
-    },
-    {
-        path: '/events',
-        page: EventsPage
-    },
-    {
-        path: '/events/:eventId',
-        page: EventPage
-    },
-    {
-        path: '/vision',
-        page: VisionPage
-    },
-    {
-        path: '/join-cr',
-        page: CrVideo
-    },
-    {
-        path: '/privacy',
-        page: PrivacyPage
-    },
-    {
-        path: '/terms',
-        page: TermsPage
-    },
-    /*
+  {
+    path: '/help',
+    page: HelpPage,
+  },
+  {
+    path: '/faq',
+    page: FAQPage,
+  },
+  {
+    path: '/about',
+    page: AboutPage,
+  },
+  {
+    path: '/slack',
+    page: SlackPage,
+  },
+  {
+    path: '/events',
+    page: EventsPage,
+  },
+  {
+    path: '/events/:eventId',
+    page: EventPage,
+  },
+  {
+    path: '/vision',
+    page: VisionPage,
+  },
+  {
+    path: '/join-cr',
+    page: CrVideo,
+  },
+  {
+    path: '/privacy',
+    page: PrivacyPage,
+  },
+  {
+    path: '/terms',
+    page: TermsPage,
+  },
+  /*
+     ********************************************************************************
+     * Suggestion page
+     ********************************************************************************
+     */
+  {
+    path: '/suggestion',
+    page: SuggestionListPage,
+  },
+  {
+    path: '/suggestion/:id',
+    page: SuggestionDetailPage,
+  },
+  /*
     ********************************************************************************
     * Profile page
     ********************************************************************************
       */
-    {
-        path: '/profile/info',
-        page: ProfileInfoPage
-    },
-    {
-        path: '/profile/tasks',
-        page: ProfileTasksPage
-    },
-    {
-        path: '/profile/task-detail/:taskId',
-        page: TaskDetailPage
-    },
-    {
-        path: '/profile/team-detail/:teamId',
-        page: TeamDetailPage
-    },
-    {
-        path: '/profile/task-app/:taskId/:applicantId',
-        page: ProfileTaskApplicationDetailPage
-    },
-    {
-        path: '/profile/projects',
-        page: ProfileProjectsPage
-    },
-    {
-        path: '/profile/project-detail/:taskId',
-        page: TaskDetailPage
-    },
-    {
-        path: '/project-detail/:taskId',
-        page: ProjectDetailPage
-    },
-    {
-        path: '/profile/teams',
-        page: ProfileTeamsPage
-    },
-    {
-        path: '/profile/teams/create',
-        page: ProfileTeamCreatePage
-    },
-    {
-        path: '/team-detail/:teamId',
-        page: TeamDetailPage
-    },
-    {
-        path: '/profile/submissions',
-        page: ProfileSubmissionsPage
-    },
-    {
-        path: '/profile/submissions/create',
-        page: ProfileSubmissionCreatePage
-    },
-    {
-        path: '/profile/communities',
-        page: ProfileCommunitiesPage
-    },
-    {
-        path: '/profile/submission-detail/:submissionId',
-        page: ProfileSubmissionDetailPage
-    },
-    {
-        path: '/crcles-detail/:circleId',
-        page: CircleDetailPage
-    },
-    /*
+  {
+    path: '/profile/info',
+    page: ProfileInfoPage,
+  },
+  {
+    path: '/profile/tasks',
+    page: ProfileTasksPage,
+  },
+  {
+    path: '/profile/task-detail/:taskId',
+    page: TaskDetailPage,
+  },
+  {
+    path: '/profile/team-detail/:teamId',
+    page: TeamDetailPage,
+  },
+  {
+    path: '/profile/task-app/:taskId/:applicantId',
+    page: ProfileTaskApplicationDetailPage,
+  },
+  {
+    path: '/profile/projects',
+    page: ProfileProjectsPage,
+  },
+  {
+    path: '/profile/project-detail/:taskId',
+    page: TaskDetailPage,
+  },
+  {
+    path: '/project-detail/:taskId',
+    page: ProjectDetailPage,
+  },
+  {
+    path: '/profile/teams',
+    page: ProfileTeamsPage,
+  },
+  {
+    path: '/profile/teams/create',
+    page: ProfileTeamCreatePage,
+  },
+  {
+    path: '/team-detail/:teamId',
+    page: TeamDetailPage,
+  },
+  {
+    path: '/profile/submissions',
+    page: ProfileSubmissionsPage,
+  },
+  {
+    path: '/profile/submissions/create',
+    page: ProfileSubmissionCreatePage,
+  },
+  {
+    path: '/profile/communities',
+    page: ProfileCommunitiesPage,
+  },
+  {
+    path: '/profile/submission-detail/:submissionId',
+    page: ProfileSubmissionDetailPage,
+  },
+  {
+    path: '/crcles-detail/:circleId',
+    page: CircleDetailPage,
+  },
+  {
+    path: '/profile/suggestion',
+    page: ProfileSuggestionListPage,
+  },
+  /*
     ********************************************************************************
     * External Forms
     ********************************************************************************
       */
-    {
-        path: '/form/training1',
-        page: FormTraining1Page
-    },
-    /*
+  {
+    path: '/form/training1',
+    page: FormTraining1Page,
+  },
+  /*
     ********************************************************************************
     * Internal Forms
     ********************************************************************************
       */
-    {
-        path: '/form/organizer',
-        page: FormOrganizerApp
-    },
-    {
-        path: '/form/anniversary2018',
-        page: FormAnniversaryApp
-    },
-    {
-        path: '/form/anniversaryVideo2018',
-        page: FormAnniversaryVideo
-    },
-    /*
+  {
+    path: '/form/organizer',
+    page: FormOrganizerApp,
+  },
+  {
+    path: '/form/anniversary2018',
+    page: FormAnniversaryApp,
+  },
+  {
+    path: '/form/anniversaryVideo2018',
+    page: FormAnniversaryVideo,
+  },
+  /*
     ********************************************************************************
     * Users
     ********************************************************************************
       */
-    {
-        // public profile page
-        path: '/member/:userId',
-        page: MemberPage
-    },
-    /*
+  {
+    // public profile page
+    path: '/member/:userId',
+    page: MemberPage,
+  },
+  /*
     ********************************************************************************
     * Admin
     ********************************************************************************
       */
-    {
-        path: '/admin/users',
-        page: AdminUsersPage
-    },
-    {
-        path: '/admin/profile/:userId',
-        page: AdminProfileDetailPage
-    },
-    {
-        path: '/admin/forms',
-        page: AdminFormsPage
-    },
-    {
-        path: '/admin/community',
-        page: CountryCommunitiesPage
-    },
-    {
-        path: '/admin/community/country/:country',
-        page: CountryCommunitiesPage
-    },
-    {
-        path: '/admin/community/:community/country/:country',
-        page: CommunityDetailPage
-    },
-    {
-        path: '/admin/community/:community/country/:country/region/:region',
-        page: CommunityDetailPage
-    },
-    /*
+  {
+    path: '/admin/users',
+    page: AdminUsersPage,
+  },
+  {
+    path: '/admin/profile/:userId',
+    page: AdminProfileDetailPage,
+  },
+  {
+    path: '/admin/forms',
+    page: AdminFormsPage,
+  },
+  {
+    path: '/admin/community',
+    page: CountryCommunitiesPage,
+  },
+  {
+    path: '/admin/community/country/:country',
+    page: CountryCommunitiesPage,
+  },
+  {
+    path: '/admin/community/:community/country/:country',
+    page: CommunityDetailPage,
+  },
+  {
+    path: '/admin/community/:community/country/:country/region/:region',
+    page: CommunityDetailPage,
+  },
+  {
+    path: '/admin/suggestion',
+    page: AdminSuggestionPage,
+  },
+  /*
     ********************************************************************************
     * Community
     ********************************************************************************
       */
-    {
-        path: '/community',
-        page: PublicCountryCommunitiesPage
-    },
-    {
-        path: '/community/country/:country',
-        page: PublicCountryCommunitiesPage
-    },
-    {
-        path: '/community/:community/country/:country',
-        page: PublicCommunityDetailPage
-    },
-    {
-        path: '/community/:community/country/:country/region/:region',
-        page: PublicCommunityDetailPage
-    },
-    /*
+  {
+    path: '/community',
+    page: PublicCountryCommunitiesPage,
+  },
+  {
+    path: '/community/country/:country',
+    page: PublicCountryCommunitiesPage,
+  },
+  {
+    path: '/community/:community/country/:country',
+    page: PublicCommunityDetailPage,
+  },
+  {
+    path: '/community/:community/country/:country/region/:region',
+    page: PublicCommunityDetailPage,
+  },
+  /*
     ********************************************************************************
     * TODO
     ********************************************************************************
       */
-    {
-        path: '/admin/teams',
-        page: TeamListPage
-    },
-    {
-        path: '/admin/teams/:teamId',
-        page: TeamDetailPage
-    },
+  {
+    path: '/admin/teams',
+    page: TeamListPage,
+  },
+  {
+    path: '/admin/teams/:teamId',
+    page: TeamDetailPage,
+  },
 
-    // council
-    {
-        path : '/council',
-        page : CouncilPage
-    },
-    {
-        path : '/council/list',
-        page : CouncilListPage
-    },
-    {
-        path : '/council/detail/:id',
-        page : CouncilDetailPage
-    },
-    {
-        path : '/cvote/create',
-        page : CVoteCreatePage
-    },
-    {
-        path : '/cvote/list',
-        page : CVoteListPage
-    },
-    {
-        path : '/cvote/edit/:id',
-        page : CVoteEditPage
-    },
+  // council
+  {
+    path: '/proposals',
+    page: CouncilPage,
+  },
+  // {
+  //     path : '/council-secretariat',
+  //     page : CouncilSecretariatPage
+  // },
+  {
+    path: '/council/list',
+    page: CouncilListPage,
+  },
+  {
+    path: '/council/detail/:id',
+    page: CouncilDetailPage,
+  },
+  {
+    path: '/cvote/create',
+    page: CVoteCreatePage,
+  },
+  {
+    path: '/cvote/list',
+    page: CVoteListPage,
+  },
+  {
+    path: '/cvote/:id',
+    page: CVoteDetailPage,
+  },
+  {
+    path: '/cvote/edit/:id',
+    page: CVoteEditPage,
+  },
 
 
-    // Other
-    {
-        page: NotFound
-    }
+  // Other
+  {
+    page: NotFound,
+  },
 ]
